@@ -1,0 +1,26 @@
+load(
+    "@rules_haskell//haskell:defs.bzl",
+    "haskell_test",
+)
+
+haskell_test(
+    name = "test",
+    srcs = [
+        "AppSpec.hs",
+        "Spec.hs",
+    ],
+    #main_function = "Spec.main",
+    tools = ["@hspec-discover"],
+    compiler_flags = ["-XCPP", "-DHSPEC_DISCOVER=$(location @hspec-discover)"],
+    deps = [
+        "//haskell/src:app",
+        "@stackage//:base",
+        "@stackage//:hspec",
+        "@stackage//:http-client",
+        "@stackage//:http-types",
+        "@stackage//:servant-client",
+        "@stackage//:servant-server",
+        "@stackage//:wai",
+        "@stackage//:warp",
+    ],
+)

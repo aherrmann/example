@@ -1,1 +1,2 @@
-{-# OPTIONS_GHC -F -pgmF hspec-discover #-}
+{-# LANGUACE CPP #-}
+{-# OPTIONS_GHC -F -pgmF HSPEC_DISCOVER #-}
