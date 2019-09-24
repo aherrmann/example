@@ -60,6 +60,9 @@ stack_snapshot(
         "wai",
         "warp",
     ],
+    extra_deps = {
+        "zlib": ["@zlib"],
+    },
     snapshot = "lts-13.8",
 )
 
