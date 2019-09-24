@@ -1,0 +1,18 @@
+load(
+    "@rules_haskell//haskell:defs.bzl",
+    "haskell_library",
+)
+
+haskell_library(
+    name = "app",
+    srcs = ["App.hs"],
+    deps = [
+        "@stackage//:base",
+        "@stackage//:servant",
+        "@stackage//:servant-server",
+        "@stackage//:aeson",
+        "@stackage//:wai",
+        "@stackage//:warp",
+    ],
+    visibility = ["//haskell:__subpackages__"],
+)
