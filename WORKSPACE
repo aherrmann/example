@@ -20,3 +20,29 @@ load(
 
 rules_haskell_dependencies()
 rules_haskell_toolchains()
+
+load(
+    "@rules_haskell//haskell:cabal.bzl",
+    "stack_snapshot",
+)
+
+stack_snapshot(
+    name = "stackage",
+    packages = [
+        "aeson",
+        "base",
+        "directory",
+        "filepath",
+        "hspec",
+        "hspec-discover",
+        "http-client",
+        "http-types",
+        "servant",
+        "servant-client",
+        "servant-server",
+        "transformers",
+        "wai",
+        "warp",
+    ],
+    snapshot = "lts-13.8",
+)
