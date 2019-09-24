@@ -46,3 +46,29 @@ stack_snapshot(
     ],
     snapshot = "lts-13.8",
 )
+
+http_archive(
+    name = "hspec-discover",
+    strip_prefix = "hspec-discover-2.6.1",
+    urls = [
+        "http://hackage.haskell.org/package/hspec-discover-2.6.1/hspec-discover-2.6.1.tar.gz",
+    ],
+    sha256 = "9d569a9587d2034272d287442855490a06266192eba1da871cae7d971b922fa1",
+    build_file_content = """
+load(
+    "@rules_haskell//haskell:cabal.bzl",
+    "haskell_cabal_binary",
+)
+haskell_cabal_binary(
+    name = "hspec-discover",
+    srcs = glob(["**"]),
+    deps = [
+        "@stackage//:base",
+        "@stackage//:directory",
+        "@stackage//:filepath",
+        "@stackage//:hspec-discover",
+    ],
+    visibility = ["//visibility:public"],
+)
+""",
+)
