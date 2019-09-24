@@ -7,9 +7,9 @@ load(
 
 http_archive(
     name = "rules_haskell",
-    strip_prefix = "rules_haskell-0.10",
-    urls = ["https://github.com/tweag/rules_haskell/archive/v0.10.tar.gz"],
-    sha256 = "48be5de64e883905fd29b6a42fc091f13f44102b9efac9228ba7b958a7e03e32",
+    strip_prefix = "rules_haskell-6a2c09fa4da023ff890749125590fe752a1ba2c4",
+    urls = ["https://github.com/tweag/rules_haskell/archive/6a2c09fa4da023ff890749125590fe752a1ba2c4.tar.gz"],
+    sha256 = "a3d588ca64163d59a2330554e9c8704ab6e07bab861957595e8c26c02a6c2a29",
 )
 
 load(
