@@ -14,5 +14,5 @@ haskell_library(
         "@stackage//:wai",
         "@stackage//:warp",
     ],
-    visibility = ["//haskell:__subpackages__"],
+    visibility = ["//haskell/exe:__pkg__", "//haskell/test:__pkg__"],
 )

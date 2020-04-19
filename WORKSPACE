@@ -1,25 +1,34 @@
 workspace(name = "bazel_and_package_managers")
 
+# Load the repository rule to download an http archive.
 load(
     "@bazel_tools//tools/build_defs/repo:http.bzl",
     "http_archive"
 )
 
+# Download rules_haskell and make it accessible as "@rules_haskell".
 http_archive(
     name = "rules_haskell",
-    strip_prefix = "rules_haskell-6a2c09fa4da023ff890749125590fe752a1ba2c4",
-    urls = ["https://github.com/tweag/rules_haskell/archive/6a2c09fa4da023ff890749125590fe752a1ba2c4.tar.gz"],
-    sha256 = "a3d588ca64163d59a2330554e9c8704ab6e07bab861957595e8c26c02a6c2a29",
+    strip_prefix = "rules_haskell-0.12",
+    urls = ["https://github.com/tweag/rules_haskell/archive/v0.12.tar.gz"],
+    sha256 = "56a8e6337df8802f1e0e7d2b3d12d12d5d96c929c8daecccc5738a0f41d9c1e4",
 )
 
 load(
     "@rules_haskell//haskell:repositories.bzl",
     "rules_haskell_dependencies",
+)
+
+# Setup all Bazel dependencies required by rules_haskell.
+rules_haskell_dependencies()
+
+load(
+    "@rules_haskell//haskell:toolchain.bzl",
     "rules_haskell_toolchains",
 )
 
-rules_haskell_dependencies()
-rules_haskell_toolchains()
+# Download a GHC binary distribution from haskell.org and register it as a toolchain.
+rules_haskell_toolchains(version = "8.6.5")
 
 http_archive(
     name = "zlib",
@@ -63,7 +72,7 @@ stack_snapshot(
     extra_deps = {
         "zlib": ["@zlib"],
     },
-    snapshot = "lts-13.8",
+    snapshot = "lts-14.11",
 )
 
 http_archive(
@@ -73,6 +82,9 @@ http_archive(
         "http://hackage.haskell.org/package/hspec-discover-2.6.1/hspec-discover-2.6.1.tar.gz",
     ],
     sha256 = "9d569a9587d2034272d287442855490a06266192eba1da871cae7d971b922fa1",
+    # Thanks to this archive, we can make executable "hspec-discover"
+    # available to other rules (see "@hspec-discover" references).
+    # To build the executable, we use the haskell_cabal_binary rule:
     build_file_content = """
 load(
     "@rules_haskell//haskell:cabal.bzl",
