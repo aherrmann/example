@@ -7,7 +7,7 @@ haskell_binary(
     name = "server",
     srcs = ["Main.hs"],
     deps = [
-        "//haskell/src:app",
+        "//haskell/src:mylib",
         "@stackage//:base",
     ],
 )
