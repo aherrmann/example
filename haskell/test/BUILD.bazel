@@ -13,7 +13,7 @@ haskell_test(
     tools = ["@hspec-discover"],
     compiler_flags = ["-XCPP", "-DHSPEC_DISCOVER=$(location @hspec-discover)"],
     deps = [
-        "//haskell/src:app",
+        "//haskell/src:mylib",
         "@stackage//:base",
         "@stackage//:hspec",
         "@stackage//:http-client",
